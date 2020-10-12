@@ -3,6 +3,7 @@ from geopy.geocoders import Nominatim
 import urllib.request
 import json
 import datetime
+import math
     
 ser = serial.Serial('/dev/ttyAMA0',  9600, timeout = 0)
 ser.flush()
@@ -100,22 +101,6 @@ class GPS:
         
         GPS.values = [lat,lat_ns,long,long_ew,sats,alt,spd]
     
-    def getAddress(self):
-        api_key = "AIzaSyBye-KERYIXDd24hk0C19mSMXdS7TmCX3M"
-        coordinates = str(GPS.values[0]) + "," + str(GPS.values[2])
-        link = "https://maps.googleapis.com/maps/api/geocode/json?latlng={}&key={}".format(coordinates, api_key)
-        response = urllib.request.urlopen(link).read()
-        address = json.loads(response)["results"][0]["formatted_address"]
-        return address
-    
-    def getAddress(self, lat, long):
-        api_key = "AIzaSyBye-KERYIXDd24hk0C19mSMXdS7TmCX3M"
-        coordinates = str(lat) + "," + str(long)
-        link = "https://maps.googleapis.com/maps/api/geocode/json?latlng={}&key={}".format(coordinates, api_key)
-        response = urllib.request.urlopen(link).read()
-        address = json.loads(response)["results"][0]["formatted_address"]
-        return address
-
     def getLatitude(self):
         return GPS.values[0]
     def getNS(self):
@@ -130,46 +115,106 @@ class GPS:
         return GPS.values[5]
     def getSpeed(self):
         return GPS.values[6]
+
+class GPS_Extension:
+    g = None
+    
+    def __init__(self):
+        g = GPS()
+    
+    def getAddress(self):
+        global g
+        
+        g.refresh()
+        api_key = "AIzaSyBye-KERYIXDd24hk0C19mSMXdS7TmCX3M"
+        coordinates = str(g.getLatitude()) + "," + str(g.getLongitude())
+        link = "https://maps.googleapis.com/maps/api/geocode/json?latlng={}&key={}".format(coordinates, api_key)
+        response = urllib.request.urlopen(link).read()
+        address = json.loads(response)["results"][0]["formatted_address"]
+        return address
+    
+    def getAddressFromCoordinates(self, lat, long):
+        api_key = "AIzaSyBye-KERYIXDd24hk0C19mSMXdS7TmCX3M"
+        coordinates = str(lat) + "," + str(long)
+        link = "https://maps.googleapis.com/maps/api/geocode/json?latlng={}&key={}".format(coordinates, api_key)
+        response = urllib.request.urlopen(link).read()
+        address = json.loads(response)["results"][0]["formatted_address"]
+        return address
+    
+    def getCoordinatesFromAddress(self, address):
+        api_key = "AIzaSyBye-KERYIXDd24hk0C19mSMXdS7TmCX3M"
+        address = address.replace(" ", "+")
+        link = "https://maps.googleapis.com/maps/api/geocode/json?address={}&key={}".format(address, api_key)
+        response = urllib.request.urlopen(link).read()
+        data = json.loads(response)
+        latitude = data["results"][0]["geometry"]["location"]["lat"]
+        longitude = data["results"][0]["geometry"]["location"]["lng"]
+        return [latitude, longitude]
+    
+    def distance(self, lat1, lng1, lat2, lng2):
+        degtorad = math.pi/180
+        dLat = (lat1-lat2)*degtorad
+        dLng = (lng1-lng2)*degtorad
+        a = pow(math.sin(dLat/2), 2) + math.cos(lat1*degtorad)*math.cos(lat2*degtorad)*pow(math.sin(dLng/2), 2)
+        b = 2*math.atan2(math.sqrt(a), math.sqrt(1-a))
+        return 6371*b
     
     def setHomeAddress(self, address):
-        GPS.home = address
         f = open("home.txt", "w")
-        f.write(address + "\n")
+        f.write(home)
         f.close()
     
     def getHomeAddress(self):
-        return GPS.home
+        f = open("home.txt", "r")
+        a = f.readlines()
+        return a[0]
     
     def logLocation(self):
+        time_start = time.time()
+        dt = datetime.datetime.now()
+        address1 = self.getAddress()
+        h = open("history.txt", "a")
+        h.write(dt1 + "\n")
+        h.write(address1 + "\n")
+        h.close()
         while True:
-            dt1 = str(datetime.datetime.now())
-            self.refresh()
-            address1 = self.getAddress(self.getLatitude(), self.getLongitude())
-            time.sleep(240)
-            self.refresh()
-            address2 = self.getAddress(self.getLatitude(), self.getLongitude())
-            if address1 == address2:
+            address2 = self.getAddress()
+            if address1 != address2:
+                dt = datetime.datetime.now()
                 f = open("history.txt", "a")
-                f.write(dt1 + "\n")
+                f.write(dt + "\n")
                 f.write(address2 + "\n")
                 f.close()
                 favourites = open("favourites.txt")
                 fav = json.load(favourites)
                 favourites.close()
-                if address1 in fav:
-                    fav[address1] += 1
+                if address2 in fav:
+                    fav[address2] += 1
                 else:
-                    fav[address1] = 1
+                    fav[address2] = 1
                 new_favourites = open("favourites.txt", "w")
                 json.dump(fav, new_favourites)
                 new_favourites.close()
+                address1 = address2
+            time.sleep(60)
     
     def getFavouriteLocations(self):
+        favourites = open("favourites.txt")
+        fav = json.load(favourites)
+        favourites.close()
+        top = []
+        for i in range(5):
+            highest = 0
+            place = ""
+            for j in fav:
+                if fav[j] > highest:
+                    highest = fav[j]
+                    place = j
+            fav.pop(place)
+            top.append(place)
+        return top
         
-            
-            
-            
-            
-            
-            
-            
+if __name__ == "__main__":
+    g = GPS_Extension()
+    #print(g.getCoordinatesFromAddress("19 Loots Road Blairgowrie, Randburg"))
+    print(g.distance(-26.103062, 28.003815, -26.116043, 28.001292))
