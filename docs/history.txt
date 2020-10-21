@@ -20,3 +20,87 @@
 19 Loots Rd, Blairgowrie, Randburg, 2194, South Africa
 2020-10-20 14:15:15.530264
 19 Loots Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-20 17:40:51.478875
+17 Loots Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-20 18:19:30.839040
+22 Loots Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-20 18:22:14.997994
+19 Loots Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-20 19:29:01.308278
+19 Loots Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-20 20:00:50.561547
+19 Loots Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-20 20:05:50.375595
+19 Loots Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-20 21:49:09.428676
+19 Loots Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 17:37:42.727394
+19 Loots Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 17:54:41.299521
+1 Loots Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:21:43.436661
+70 Conrad Dr, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:21:46.240308
+64 Conrad Dr, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:24:47.596888
+1 Geneva Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:25:21.178946
+3 Geneva Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:25:32.416150
+5 Geneva Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:25:54.758731
+2 Eileen Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:26:06.073859
+4 Geneva Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:26:39.765222
+7 Geneva Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:26:50.963620
+6 Geneva Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:27:02.310324
+8 Geneva Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:27:13.946155
+10 Geneva Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:27:25.314233
+15 Geneva Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:27:36.639041
+14 Geneva Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:27:47.832602
+16 Geneva Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:28:12.129021
+Bramfischer Ave & Grove Rd, Blairgowrie, Randburg, 2194, South Africa
+2020-10-21 18:28:35.146366
+11 Grove St, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:28:53.637847
+3rd Floor, Oak Place, West Wing, Oak Ave, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:29:06.364633
+19 Grove St, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:29:09.908270
+21A Grove St, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:29:18.322430
+23 Grove St, Ferndale, Randburg, 2160, South Africa
+2020-10-21 18:29:22.065436
+25 Vale Ave, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:29:36.515326
+29 Grove St, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:33:55.049118
+37 Grove St, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:34:36.067270
+220 Main Ave, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:34:57.189644
+206 Main Ave, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:35:12.171411
+61 Cross Street, President Ridge, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:35:26.299368
+43 Cross St, President Ridge, Randburg, 2194, South Africa
+2020-10-21 18:35:29.084375
+53 Cross St, President Ridge, Randburg, 2194, South Africa
+2020-10-21 18:35:37.479986
+53 Cross St, President Ridge, Randburg, 2194, South Africa
+2020-10-21 18:36:02.750496
+43 Cross St, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:37:32.559516
+239 Vale Ave, Ferndale, Randburg, 2194, South Africa
+2020-10-21 18:37:55.999616
+Brightwater Commons, 50 Vale Ave, Ferndale, Randburg, 2194, South Africa
+2020-10-21 19:36:17.798852
+19 Loots Rd, Blairgowrie, Randburg, 2194, South Africa

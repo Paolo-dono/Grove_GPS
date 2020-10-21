@@ -30,9 +30,11 @@ class location_calcs:
         g.refresh()
         api_key = "AIzaSyBye-KERYIXDd24hk0C19mSMXdS7TmCX3M"
         coordinates = str(g.getLatitude()) + "," + str(g.getLongitude())
+        print(coordinates)
         link = "https://maps.googleapis.com/maps/api/geocode/json?latlng={}&key={}".format(coordinates, api_key)
         response = urllib.request.urlopen(link).read()
         data = json.loads(response)
+        print("Size: " + str(len(data["results"])))
         address = data["results"][0]["formatted_address"]
         return address
     
@@ -88,24 +90,33 @@ class location_calcs:
         time_start = time.time()               # this block creates a new entry in the history log with the current location and timestamp
         dt = datetime.datetime.now()           # because it is assumed the GPS was turned off for some time so it has to start a new log 
         address1 = self.getCurrentAddress()
+        print(address1)
         h = open("history.txt", "a")
+        if h.closed:
+            print("closed")
+        else:
+            print("open")
         h.write(str(dt) + "\n")
         h.write(address1 + "\n")
+        h.flush()
+        sys.stdout.flush()
         h.close()
         
         while True: # infinite loop for continuous logging
             address2 = self.getCurrentAddress()
-            if address2 != address1: # check if location has changed
+            print(address2)
+            if address1 != address2: # check if location has changed
                 time_elapsed = time.time() - time_start
                 if time_elapsed > 600: # if at least 10 minutes has passed, address1 is seen as a visit and so
-                    favourites = open("favourites.txt") # address1 had to be updated in the favourites file
-                    fav = json.load(favourites)
+                    favourites = open("favourites.txt") # address1 had to be updated in the favourites file                    fav = json.load(favourites)
                     favourites.close()
                     if address1 in fav:   # if address1 is already in the favourites file,
                         fav[address1] += 1 # the number of visitations is incremented
                     else:
                         fav[address1] = 1 # otherwise it is added to the file with an initial value
                     new_favourites = open("favourites.txt", "w")
+                    new_favourites.flush()
+                    sys.stdout.flush()
                     json.dump(fav, new_favourites)
                     new_favourites.close()
                 
@@ -113,6 +124,8 @@ class location_calcs:
                 f = open("history.txt", "a")
                 f.write(str(dt) + "\n")
                 f.write(address2 + "\n")
+                f.flush()
+                sys.stdout.flush()
                 f.close()
                 
                 address1 = address2        # the reference address (address1) is changed to address2
@@ -123,28 +136,28 @@ class location_calcs:
         favourites = open("favourites.txt") # reads in dictionary of all visited locations
         fav = json.load(favourites)         # note: a visit is seen as remaining at the same location
         favourites.close()                  # for at least 10 minutes
-        top = [] # stores a list of most visited places
+        top = []
         
         for i in range(5):
-            highest = 0 # stores highest number of visits
-            place = "" # stores address of that location
-            for j in fav: # this loop finds the highest number of visits in the dictionary
+            highest = 0
+            place = ""
+            for j in fav:
                 if fav[j] > highest:
                     highest = fav[j]
                     place = j
-            fav.pop(place) # the most visited location is removed
-            top.append(place) # and added to the list of most visited places
+            fav.pop(place)
+            top.append(place)
         return top
     
-    def locationAtTime(self, dt): # returns the location of the gps at a given time
+    def locationAtTime(self, dt):
         f = open("history.txt", "r")
-        data = f.readlines() # read all history logs
+        data = f.readlines()
         f.close()
         start = 0
         stop = len(data)
         found = False
         address = ""
-        while found == False: # search through the data using an interval search algorithm
+        while found == False:
             pos = (stop - start)//2 + start
             if pos%2 == 1:
                 pos-=1
@@ -154,10 +167,10 @@ class location_calcs:
                 start = pos
             if (stop - start) == 2:
                 found = True
-                address = data[start+1]
+                address = data[pos+1]
         return address
     
-    def timesAtLocation(self, address): # returns the number of times a given address was visited
+    def timesAtLocation(self, address):
         favourites = open("favourites.txt")
         fav = json.load(favourites)
         favourites.close()
@@ -168,4 +181,4 @@ if __name__ == "__main__":
     print("Coordinates:", gps.getCoordinatesFromAddress("46 6th Street, Linden, Randburg"))
     print("Distance:", gps.distance(-26.103062, 28.003815, -26.116043, 28.001292))
     print("Address:", gps.getAddressFromCoordinates(-26.103062, 28.003815))
-    print("Location at 2020-10-21 18:27:27 :", gps.locationAtTime("2020-10-21 18:27:27"))
+    print("Location at 2020-10-20 18:00 :", gps.locationAtTime("2020-10-20 18:00"))
