@@ -1,6 +1,0 @@
-from location_calcs import location_calcs
-import time
-
-time.sleep(30)
-g = location_calcs()
-g.logLocation()
