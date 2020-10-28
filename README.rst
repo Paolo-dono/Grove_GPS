@@ -72,8 +72,8 @@ Methods of the location_calcs class:
 
 Known bugs
 
-* The Grove GPS can often struggle to connect with satellites. If you see it is struggling, you must take it outside under 
-the open sky (and only turn it on when you are outside) and then wait for at least half a minute before moving indoors
+* The Grove GPS can often struggle to connect with satellites. If you see it is struggling, you must take it outside under the open sky (and only turn it on when you are outside) and then wait for at least half a minute before moving indoors
+
 * When running the logLocation() method the GPS values that are fetched can get frozen and show you are staying in the same position even when driving around
 
 Acknowledgements:
