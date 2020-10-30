@@ -43,9 +43,8 @@
 
 <div class="viewcode-block" id="location_calcs"><a class="viewcode-back" href="../../index.html#docs.location_calcs.location_calcs">[docs]</a><span class="k">class</span> <span class="nc">location_calcs</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Perform calculations on values fetched from GPS&quot;&quot;&quot;</span>
-    
     <span class="n">g</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">refresh</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">refresh</span> <span class="o">=</span> <span class="mi">30</span>
     <span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -57,20 +56,44 @@
         <span class="k">global</span> <span class="n">api_key</span>
         
         <span class="n">g</span> <span class="o">=</span> <span class="n">GPS</span><span class="p">()</span>
-        <span class="n">refresh</span> <span class="o">=</span> <span class="mi">10</span>
-        <span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;AIzaSyBye-KERYIXDd24hk0C19mSMXdS7TmCX3M&quot;</span>
+        <span class="n">refresh</span> <span class="o">=</span> <span class="mi">30</span>
+        <span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;api_key.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+            <span class="n">api_key</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No API key found&quot;</span><span class="p">)</span>
     
 <div class="viewcode-block" id="location_calcs.getLogRefreshRate"><a class="viewcode-back" href="../../index.html#docs.location_calcs.location_calcs.getLogRefreshRate">[docs]</a>    <span class="k">def</span> <span class="nf">getLogRefreshRate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the rate at which new locations are added to the </span>
 <span class="sd">        history log of locations visited</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">global</span> <span class="n">refresh</span>
+        <span class="c1">#global refresh</span>
         <span class="k">return</span> <span class="n">refresh</span></div>
     
 <div class="viewcode-block" id="location_calcs.setLogRefreshRate"><a class="viewcode-back" href="../../index.html#docs.location_calcs.location_calcs.setLogRefreshRate">[docs]</a>    <span class="k">def</span> <span class="nf">setLogRefreshRate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_refresh</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set a new refresh rate for the history log&quot;&quot;&quot;</span>
         <span class="k">global</span> <span class="n">refresh</span>
         <span class="n">refresh</span> <span class="o">=</span> <span class="n">new_refresh</span></div>
+    
+<div class="viewcode-block" id="location_calcs.setAPIkey"><a class="viewcode-back" href="../../index.html#docs.location_calcs.location_calcs.setAPIkey">[docs]</a>    <span class="k">def</span> <span class="nf">setAPIkey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set API key and store it in a text file&quot;&quot;&quot;</span>
+        <span class="k">global</span> <span class="n">api_key</span>
+        
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;api_key.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">api_key</span> <span class="o">=</span> <span class="n">key</span></div>
+    
+<div class="viewcode-block" id="location_calcs.getAPIkey"><a class="viewcode-back" href="../../index.html#docs.location_calcs.location_calcs.getAPIkey">[docs]</a>    <span class="k">def</span> <span class="nf">getAPIkey</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return API keyfrom text file&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;api_key.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No API key found&quot;</span><span class="p">)</span></div>
     
 <div class="viewcode-block" id="location_calcs.getCurrentAddress"><a class="viewcode-back" href="../../index.html#docs.location_calcs.location_calcs.getCurrentAddress">[docs]</a>    <span class="k">def</span> <span class="nf">getCurrentAddress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Perform reverse geocoding to return the current street</span>
@@ -157,10 +180,13 @@
         <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
     
 <div class="viewcode-block" id="location_calcs.getHomeAddress"><a class="viewcode-back" href="../../index.html#docs.location_calcs.location_calcs.getHomeAddress">[docs]</a>    <span class="k">def</span> <span class="nf">getHomeAddress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns home address from text file&quot;&quot;&quot;</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;home.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+        <span class="sd">&quot;&quot;&quot;Return home address from text file&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;home.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No address found&quot;</span><span class="p">)</span></div>
     
 <div class="viewcode-block" id="location_calcs.logLocation"><a class="viewcode-back" href="../../index.html#docs.location_calcs.location_calcs.logLocation">[docs]</a>    <span class="k">def</span> <span class="nf">logLocation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Build history of locations visited&quot;&quot;&quot;</span>
@@ -215,7 +241,7 @@
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">refresh</span><span class="p">)</span> <span class="c1"># rate at which logging takes place</span></div>
     
 <div class="viewcode-block" id="location_calcs.getFavouriteLocations"><a class="viewcode-back" href="../../index.html#docs.location_calcs.location_calcs.getFavouriteLocations">[docs]</a>    <span class="k">def</span> <span class="nf">getFavouriteLocations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a list of top 5 favourite locations&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of top 5 favourite locations&quot;&quot;&quot;</span>
         <span class="c1"># reads in dictionary of all visited locations</span>
         <span class="c1"># note: a visit is seen as remaining at the same location</span>
         <span class="c1"># for at least 10 minutes</span>

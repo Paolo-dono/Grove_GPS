@@ -8,9 +8,8 @@ import sys
 
 class location_calcs:
     """Perform calculations on values fetched from GPS"""
-    
     g = None
-    refresh = 10
+    refresh = 30
     api_key = ""
     
     def __init__(self):
@@ -22,20 +21,44 @@ class location_calcs:
         global api_key
         
         g = GPS()
-        refresh = 10
-        api_key = "AIzaSyBye-KERYIXDd24hk0C19mSMXdS7TmCX3M"
+        refresh = 30
+        api_key = ""
+        try:
+            f = open("api_key.txt", "r")
+            api_key = f.readlines()[0]
+            f.close()
+        except FileNotFoundError:
+            print("No API key found")
     
     def getLogRefreshRate(self):
         """Return the rate at which new locations are added to the 
         history log of locations visited
         """
-        global refresh
+        #global refresh
         return refresh
     
     def setLogRefreshRate(self, new_refresh):
         """Set a new refresh rate for the history log"""
         global refresh
         refresh = new_refresh
+    
+    def setAPIkey(self, key):
+        """Set API key and store it in a text file"""
+        global api_key
+        
+        f = open("api_key.txt", "w")
+        f.write(key)
+        f.close()
+        api_key = key
+    
+    def getAPIkey(self):
+        """Return API keyfrom text file"""
+        try:
+            f = open("api_key.txt", "r")
+            a = f.readlines()
+            return a[0]
+        except FileNotFoundError:
+            print("No API key found")
     
     def getCurrentAddress(self):
         """Perform reverse geocoding to return the current street
@@ -122,10 +145,13 @@ class location_calcs:
         f.close()
     
     def getHomeAddress(self):
-        """Returns home address from text file"""
-        f = open("home.txt", "r")
-        a = f.readlines()
-        return a[0]
+        """Return home address from text file"""
+        try:
+            f = open("home.txt", "r")
+            a = f.readlines()
+            return a[0]
+        except FileNotFoundError:
+            print("No address found")
     
     def logLocation(self):
         """Build history of locations visited"""
@@ -180,7 +206,7 @@ class location_calcs:
             time.sleep(refresh) # rate at which logging takes place
     
     def getFavouriteLocations(self):
-        """Returns a list of top 5 favourite locations"""
+        """Return a list of top 5 favourite locations"""
         # reads in dictionary of all visited locations
         # note: a visit is seen as remaining at the same location
         # for at least 10 minutes
