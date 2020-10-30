@@ -20,6 +20,10 @@ Setup to use API:
 
 * Enable UART communication using raspi-config
 
+Setup to use location_calcs:
+
+* Get a Google API key and pass it into the setAPIkey() method to get the full functionality of the class
+
 Methods of GPS class:
 
 + GPS() -> instantiates an object of the class and calls the refresh() method
@@ -43,6 +47,10 @@ Methods of GPS class:
 Methods of the location_calcs class:
 
 + location_calcs() -> creates an obect of the class, instantiates a local GPS object and sets the default refresh rate
+
++ setAPIkey(String key) -> sets a new Google Maps API key 
+
++ getAPIkey() -> returns current API key
 
 + getCurrentAddress(): String -> returns current street address from coordinates fetched from the GPS module
 
