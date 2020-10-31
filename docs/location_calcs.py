@@ -269,5 +269,3 @@ if __name__ == "__main__":
     print("Distance:", gps.distance(-26.103062, 28.003815,
                                     -26.116043, 28.001292))
     print("Address:", gps.getAddressFromCoordinates(-26.103062, 28.003815))
-    print("Location at 2020-10-21 18:27:27 :",
-          gps.locationAtTime("2020-10-21 18:27:27"))
