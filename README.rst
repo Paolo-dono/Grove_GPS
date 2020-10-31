@@ -19,7 +19,11 @@ Connecting the GPS module to the Raspberry Pi:
 Setup to use API:
 
 * Enable UART communication using raspi-config
-* Install API with the following command: pip3 install grove_gps
+* Run the following commands:
+  
+  * pip3 install datetime
+  * pip3 install pyserial
+  * pip3 install groveGPS
 
 Setup to use location_calcs:
 
