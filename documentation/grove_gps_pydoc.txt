@@ -1,0 +1,92 @@
+Help on module grove_gps:
+
+NAME
+    grove_gps
+
+DESCRIPTION
+    # The GPS module used is a Grove GPS module
+    # http://www.seeedstudio.com/depot/Grove-GPS-p-959.html
+
+CLASSES
+    builtins.object
+        GPS
+    
+    class GPS(builtins.object)
+     |  "Connect to GPS and read its values
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self)
+     |      Instantiates an object of the class
+     |      and runs the refresh() method
+     |  
+     |  getAltitude(self)
+     |      Returns the altitude
+     |  
+     |  getEW(self)
+     |      Returns whether the longitude coordinates
+     |      are East or West
+     |  
+     |  getLatitude(self)
+     |      Returns the latitude
+     |  
+     |  getLongitude(self)
+     |      Returns the longitude
+     |  
+     |  getNS(self)
+     |      Returns whether the latitiude coordinates
+     |      are North or South
+     |  
+     |  getSatellites(self)
+     |      Returns the number of satellites the GPS is conencted to
+     |  
+     |  getSpeed(self)
+     |      Returns the speed in km/h
+     |  
+     |  getUTCPosition(self)
+     |      Returns the UTC time
+     |  
+     |  refresh(self)
+     |      Reads data from the GPS and stores them in
+     |      a global array of the class
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  GGA = []
+     |  
+     |  RMC = []
+     |  
+     |  inp = []
+     |  
+     |  inp2 = []
+     |  
+     |  values = []
+
+FUNCTIONS
+    cleanstr(in_str)
+        Removes non-numerical characters, only keeps 0123456789.-
+    
+    decimal_degrees(raw_degrees)
+        Converts coordinates to decimal values
+    
+    safefloat(in_str)
+        Converts to float. If there is an error, a deafault
+        value is returned
+
+DATA
+    ser = Serial<id=0xb6566530, open=True>(port='/dev/ttyA...out=0, xonxof...
+
+FILE
+    /home/pi/Documents/EEE3097S_Project/docs/grove_gps.py
+
+

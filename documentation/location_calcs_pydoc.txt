@@ -1,0 +1,89 @@
+Help on module location_calcs:
+
+NAME
+    location_calcs
+
+CLASSES
+    builtins.object
+        location_calcs
+    
+    class location_calcs(builtins.object)
+     |  Perform calculations on values fetched from GPS
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self)
+     |      Instantiate an object of the class and initialises the
+     |      global variables
+     |  
+     |  distance(self, lat1, lng1, lat2, lng2)
+     |      Find the distance between two sets of coordinates
+     |  
+     |  distanceToHome(self)
+     |      Find the distance to the home address that was set
+     |  
+     |  getAPIkey(self)
+     |      Return API keyfrom text file
+     |  
+     |  getAddressFromCoordinates(self, lat, long)
+     |      Return the street address given cooordinates
+     |      as arguments
+     |  
+     |  getCoordinatesFromAddress(self, address)
+     |      Perform geocoding to return coordinates
+     |      given a street address
+     |  
+     |  getCurrentAddress(self)
+     |      Perform reverse geocoding to return the current street
+     |      address from the coordinates read from the GPS module
+     |  
+     |  getFavouriteLocations(self)
+     |      Return a list of top 5 favourite locations
+     |  
+     |  getHomeAddress(self)
+     |      Return home address from text file
+     |  
+     |  getLogRefreshRate(self)
+     |      Return the rate at which new locations are added to the 
+     |      history log of locations visited
+     |  
+     |  locationAtTime(self, dt)
+     |      Return the location of the gps at a given time
+     |  
+     |  logLocation(self)
+     |      Build history of locations visited
+     |  
+     |  setAPIkey(self, key)
+     |      Set API key and store it in a text file
+     |  
+     |  setHomeAddress(self, address)
+     |      Set home address and store it in a text file
+     |  
+     |  setLogRefreshRate(self, new_refresh)
+     |      Set a new refresh rate for the history log
+     |  
+     |  timesAtLocation(self, address)
+     |      Return the number of times a given address was visited
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  api_key = ''
+     |  
+     |  g = None
+     |  
+     |  refresh = 30
+
+FILE
+    /home/pi/Documents/EEE3097S_Project/docs/location_calcs.py
+
+
